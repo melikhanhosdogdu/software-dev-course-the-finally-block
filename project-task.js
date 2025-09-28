@@ -45,18 +45,29 @@ Step 4: Test Your Solution
 function processFile(fileName, fileData) {
   try {
     // TODO: Add input validation here
-    
+    if (fileName === undefined)
+      throw new ReferenceError("File name is missing");
+    if (typeof fileData !== "string")
+      throw new TypeError("File data must be a string");
+    if (fileData.length === 0) throw new Error("File data cannot be empty");
+
     // TODO: Implement simulated file processing here
     console.log(`Processing file: ${fileName}`);
     console.log(`File content: ${fileData}`);
-    
+
     // TODO: Add simulated file operations (reading/writing)
-    
+    const upper = fileData.toUpperCase();
+    console.log(`Transformed content: ${upper}`);
+    if (upper.includes("FAIL"))
+      throw new Error("Simulated file processing failure");
+    console.log("File processed successfully");
   } catch (err) {
     // TODO: Implement error handling
-    console.error(err);
+    console.error(err.name + ": " + err.message);
+  } finally {
+    // TODO: Implement a finally block to close resources
+    console.log("Closing file handle");
   }
-  // TODO: Implement a finally block to close resources
 }
 
 // ============================================
